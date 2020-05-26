@@ -57,7 +57,7 @@ public class LoginRest {
 
 	private String getJWTToken(String username) {
 
-		String secretKey = "tokenGNCtoken";
+		String secretKey = "tokenTelcel";
 
 		List<GrantedAuthority> grantedAuthorities = AuthorityUtils
 
@@ -83,7 +83,7 @@ public class LoginRest {
 
 				.setIssuedAt(new Date(System.currentTimeMillis()))
 
-				.setExpiration(new Date(System.currentTimeMillis() + 600000000))
+				.setExpiration(new Date(System.currentTimeMillis() + 120000 ))
 
 				.signWith(SignatureAlgorithm.HS512,
 
