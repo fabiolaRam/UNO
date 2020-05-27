@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.backend.graficaInforma.dto.UsuarioInforma;
 import com.backend.graficaInforma.security.User;
+import com.google.gson.Gson;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -83,7 +84,7 @@ public class LoginRest {
 
 				.setIssuedAt(new Date(System.currentTimeMillis()))
 
-				.setExpiration(new Date(System.currentTimeMillis() + 120000 ))
+				.setExpiration(new Date(System.currentTimeMillis() + 600000 ))
 
 				.signWith(SignatureAlgorithm.HS512,
 
