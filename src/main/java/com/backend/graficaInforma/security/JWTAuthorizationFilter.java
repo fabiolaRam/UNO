@@ -28,7 +28,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
 
 	private final String PREFIX = "TELCELINFORMA ";
 
-	private final String SECRET = "telcelInforma";
+	private final String SECRET = "tokenTelcel";
 
 
 
