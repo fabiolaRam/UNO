@@ -15,12 +15,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.backend.graficaInforma.dto.UserModel;
 import com.backend.graficaInforma.dto.Users;
+import com.backend.graficaInforma.repository.UsersRepository;
 import com.backend.graficaInforma.security.User;
 import com.google.gson.Gson;
 
@@ -36,7 +38,7 @@ public class LoginRest {
 	private AuthenticationManager authenticationManager;
 
 	@PostMapping("login")
-	public ResponseEntity<UserModel> login(@RequestBody Users usuario) {
+	public ResponseEntity<UserModel> login(@RequestBody Users usuario) throws Exception {
 		try {
 			System.out.println("usuario: "+ usuario.getUsername() +" password: "+usuario.getPassword());
 			Authentication auth = authenticationManager.authenticate(
@@ -49,6 +51,9 @@ public class LoginRest {
 				autorities.add(m.toString());
 			}
 			user.setAutorities(autorities);
+			if(!validaClave(usuario.getUsername(), usuario.getClave()) ) {
+				throw new Exception("clave incorrecta");
+			}
 			return new ResponseEntity<UserModel>(user, HttpStatus.OK);
 		} catch (BadCredentialsException e) {
 			System.out.println(e);
@@ -101,5 +106,17 @@ public class LoginRest {
 
 		return "TELCELINFORMA " + token;
 
+	}
+	@Autowired
+	private UsersRepository repository;
+	
+	public boolean validaClave(String usuario,  String clave) {
+		List<Users> l = new ArrayList<Users>();
+		l = repository.findByUsernameAndClave(usuario, clave);
+		if (!l.isEmpty()) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

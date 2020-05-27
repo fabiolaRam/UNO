@@ -60,14 +60,6 @@ public class EnvioSMS {
 		return false;
 	}
 
-	@GetMapping("/validaClaveAcceso/{usuario}&{clave}")
-	private Boolean validaClave(@PathVariable String usuario, @PathVariable String clave) {
-		List<Users> l = new ArrayList<Users>();
-		l = repository.findByUsernameAndClave(usuario, clave);
-		if (!l.isEmpty()) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+
+	
 }
