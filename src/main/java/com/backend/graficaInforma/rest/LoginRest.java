@@ -1,6 +1,7 @@
 package com.backend.graficaInforma.rest;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.backend.graficaInforma.dto.UserModel;
 import com.backend.graficaInforma.dto.Users;
 import com.backend.graficaInforma.security.User;
 import com.google.gson.Gson;
@@ -34,18 +36,20 @@ public class LoginRest {
 	private AuthenticationManager authenticationManager;
 
 	@PostMapping("login")
-	public ResponseEntity<User> login(@RequestBody Users usuario) {
+	public ResponseEntity<UserModel> login(@RequestBody Users usuario) {
 		try {
 			System.out.println("usuario: "+ usuario.getUsername() +" password: "+usuario.getPassword());
 			Authentication auth = authenticationManager.authenticate(
 					new UsernamePasswordAuthenticationToken(usuario.getUsername(), usuario.getPassword()));
-			User user = new User();
+			UserModel user = new UserModel();
 			user.setUsername(auth.getName());
 			user.setToken(getJWTToken(auth.getName()));
+			List<String> autorities= new ArrayList<String>();
 			for (GrantedAuthority m : auth.getAuthorities()) {
-				System.out.println(m);
+				autorities.add(m.toString());
 			}
-			return new ResponseEntity<User>(user, HttpStatus.OK);
+			user.setAutorities(autorities);
+			return new ResponseEntity<UserModel>(user, HttpStatus.OK);
 		} catch (BadCredentialsException e) {
 			System.out.println(e);
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

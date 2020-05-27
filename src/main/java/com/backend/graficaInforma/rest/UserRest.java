@@ -47,7 +47,9 @@ public class UserRest {
 		
 		Authorities aut = new Authorities();
 		aut.setUsername(usuario);
-			
+		for(String i: permisos) {
+			System.out.println(i);
+		}	
 		try {
 			if (permisos != null) {
 				for (String p : permisos) {
