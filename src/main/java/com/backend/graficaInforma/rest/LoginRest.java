@@ -111,9 +111,11 @@ public class LoginRest {
 	private UsersRepository repository;
 	
 	public boolean validaClave(String usuario,  String clave) {
+		
 		List<Users> l = new ArrayList<Users>();
 		l = repository.findByUsernameAndClave(usuario, clave);
 		if (!l.isEmpty()) {
+			System.out.println(l);
 			return true;
 		} else {
 			return false;
