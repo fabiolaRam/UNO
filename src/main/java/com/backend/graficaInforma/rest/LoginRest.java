@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.backend.graficaInforma.dto.UsuarioInforma;
+import com.backend.graficaInforma.dto.Users;
 import com.backend.graficaInforma.security.User;
 import com.google.gson.Gson;
 
@@ -34,11 +34,11 @@ public class LoginRest {
 	private AuthenticationManager authenticationManager;
 
 	@PostMapping("login")
-	public ResponseEntity<User> login(@RequestBody UsuarioInforma usuario) {
+	public ResponseEntity<User> login(@RequestBody Users usuario) {
 		try {
-			System.out.println("usuario: "+usuario.getUsuario()+" password: "+usuario.getPassword());
+			System.out.println("usuario: "+ usuario.getUsername() +" password: "+usuario.getPassword());
 			Authentication auth = authenticationManager.authenticate(
-					new UsernamePasswordAuthenticationToken(usuario.getUsuario(), usuario.getPassword()));
+					new UsernamePasswordAuthenticationToken(usuario.getUsername(), usuario.getPassword()));
 			User user = new User();
 			user.setUsername(auth.getName());
 			user.setToken(getJWTToken(auth.getName()));

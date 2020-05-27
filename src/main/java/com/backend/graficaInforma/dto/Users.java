@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -15,22 +17,41 @@ public class Users implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -4094220278947553138L;
+	
 	@Id
-	@Column(name = "USERNAME")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	
+	private Long idUsuario;
 	private String username;
-	@Column(name = "PASSWORD")
 	private String password;
-	public String getPohenNumber() {
-		return pohenNumber;
+	@Column(name ="PHONENUMBER")
+	private String phoneNumber;
+	private String usuarioReg; 
+	private String clave;
+	private String solicitud;
+	private int aviso;
+	
+	public Users() {
+		super();
+	}
+	
+	public Users(String username, String password, String phoneNumber, String usuarioReg, String token, String solicitud, int aviso) {
+		this.username = username;
+		this.password = password;
+		this.phoneNumber = phoneNumber;
+		this.usuarioReg = usuarioReg;
+		this.clave = token;
+		this.solicitud = solicitud;
+		this.aviso = aviso;
 	}
 
-	public void setPohenNumber(String pohenNumber) {
-		this.pohenNumber = pohenNumber;
+	public Long getIdUsuario() {
+		return idUsuario;
 	}
 
-	@Column(name = "PHONENUMBER")
-
-	private String pohenNumber;
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
+	}
 
 	public String getUsername() {
 		return username;
@@ -48,4 +69,50 @@ public class Users implements Serializable {
 		this.password = password;
 	}
 
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public String getUsuarioReg() {
+		return usuarioReg;
+	}
+
+	public void setUsuarioReg(String usuarioReg) {
+		this.usuarioReg = usuarioReg;
+	}
+
+	public String getClave() {
+		return clave;
+	}
+
+	public void setClave(String token) {
+		this.clave = token;
+	}
+
+	public String getSolicitud() {
+		return solicitud;
+	}
+
+	public void setSolicitud(String solicitud) {
+		this.solicitud = solicitud;
+	}
+
+	public int getAviso() {
+		return aviso;
+	}
+
+	public void setAviso(int aviso) {
+		this.aviso = aviso;
+	}
+
+	@Override
+	public String toString() {
+		return "Users [idUsuario=" + idUsuario + ", username=" + username + ", password=" + password + ", phoneNumber="
+				+ phoneNumber + ", usuarioReg=" + usuarioReg + ", clave=" + clave + ", solicitud=" + solicitud
+				+ ", aviso=" + aviso + "]";
+	}
 }

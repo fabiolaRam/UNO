@@ -16,8 +16,6 @@ import com.backend.graficaInforma.dto.InformaNoticia;
 import com.backend.graficaInforma.repository.InformaNoticiaRepository;
 import com.backend.graficaInforma.utilerias.Utilerias;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 
 @RestController
 @CrossOrigin(origins = {"http://localhost:4200","http://10.191.190.15:7777", "http://10.191.190.9:7777", "http://intranet.telcel.com:9045"})
@@ -81,7 +79,7 @@ public class InformaNoticiaRest {
 
 	@SuppressWarnings("null")
 	private String guardarNoticiaTarde(String mensaje, String estado) {
-		LocalTime limite = LocalTime.of(14, 00, 00);
+		LocalTime limite = LocalTime.of(18, 00, 00);
 		LocalTime actual = LocalTime.now();
 
 		if (actual.isAfter(limite)) {
@@ -96,7 +94,7 @@ public class InformaNoticiaRest {
 				noticia.setIp(u.obtieneIp());
 				noticia.setHora(String.valueOf(u.obtieneHora()));
 				repository.save(noticia);
-
+				System.out.println(repository.findAll());
 				return "Se registro correctamente la noticia";
 			} else {
 				return "Ocurrio un error al registrar la noticia";
@@ -106,7 +104,7 @@ public class InformaNoticiaRest {
 	
 	@SuppressWarnings("null")
 	private String guardarNoticiaNoche(String mensaje, String estado) {
-		LocalTime limite = LocalTime.of(19, 10, 00);
+		LocalTime limite = LocalTime.of(14, 10, 00);
 		LocalTime actual = LocalTime.now();
 
 		if (actual.isAfter(limite)) {

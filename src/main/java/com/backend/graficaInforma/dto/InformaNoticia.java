@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
+@Table(name ="INFORMA_NOTICIA")
 public class InformaNoticia implements Serializable {
 
 	/**
