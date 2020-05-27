@@ -44,7 +44,6 @@ public class UserRest {
 		usu.setClave("");
 		usu.setSolicitud(String.valueOf(new Date()));
 		usu.setAviso(1);
-		System.out.println(usu.toString());
 		
 		Authorities aut = new Authorities();
 		aut.setUsername(usuario);
@@ -54,7 +53,6 @@ public class UserRest {
 				for (String p : permisos) {
 					aut.setAuthority(p);
 					aRepository.save(aut);
-					System.out.println(aut.toString());
 				}
 			}
 			uRepository.save(usu);

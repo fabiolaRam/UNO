@@ -17,7 +17,8 @@ import com.backend.graficaInforma.utilerias.Utilerias;
 import com.google.gson.Gson;
 
 @RestController
-@CrossOrigin(origins = { "http://localhost:4200", "http://10.191.190.15:7777", "http://10.191.190.9:7777", "http://intranet.telcel.com:9045" })
+@CrossOrigin(origins = { "http://localhost:4200", "http://10.191.190.15:7777", "http://10.191.190.9:7777",
+		"http://intranet.telcel.com:9045" })
 public class EnvioSMS {
 
 	@Autowired
@@ -43,14 +44,18 @@ public class EnvioSMS {
 		return new ResponseEntity<>(gson.toJson(estatus), HttpStatus.OK);
 	}
 
-	@GetMapping("/enviaClaveAcceso/{telefono}")
-	private Boolean enviaClaveAcceso(@PathVariable Long telefono) {
-		if (telefono != null) {
-			String clave = Utilerias.generarToken();
-			repository.updateClave(clave, String.valueOf(telefono));
-			String mensaje = "El token de acceso es: " + clave;
-			(new Utilerias()).enviarSMS(telefono, mensaje);
-			return true;
+	@GetMapping("/enviaClaveAcceso/{username}")
+	private Boolean enviaClaveAcceso(@PathVariable String username) {
+		if (username != null) {
+			List<Users> usuario = repository.findByUsername(username);
+			Long telefono = Long.valueOf(usuario.get(0).getPhoneNumber());
+			if (telefono != null) {
+				String clave = Utilerias.generarToken();
+				repository.updateClave(clave, String.valueOf(telefono));
+				String mensaje = "El token de acceso es: " + clave;
+				(new Utilerias()).enviarSMS(telefono, mensaje);
+				return true;
+			}
 		}
 		return false;
 	}
@@ -59,7 +64,6 @@ public class EnvioSMS {
 	private Boolean validaClave(@PathVariable String usuario, @PathVariable String clave) {
 		List<Users> l = new ArrayList<Users>();
 		l = repository.findByUsernameAndClave(usuario, clave);
-		System.out.println(l.toString());
 		if (!l.isEmpty()) {
 			return true;
 		} else {

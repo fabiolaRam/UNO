@@ -27,7 +27,6 @@ public class SuscriptoresRest {
 
 	@GetMapping("/consultaSuscriptores")
 	public List<SuscriptoresCounts> consultaSuscriptores(){
-		System.out.println("entre");
 		List<SuscriptoresCounts> suscrip = repository.findSuscriptoresCount();
 		return suscrip;
 	}

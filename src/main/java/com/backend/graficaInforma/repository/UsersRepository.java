@@ -26,4 +26,6 @@ public interface UsersRepository extends CrudRepository<Users, Long> {
 	public void updateClave(@Param("clave") String clave, @Param("phoneNumber") String phoneNumber);
 
 	List<Users> findByUsernameAndClave(String username, String clave);
+	
+	List<Users> findByUsername(String username);
 }

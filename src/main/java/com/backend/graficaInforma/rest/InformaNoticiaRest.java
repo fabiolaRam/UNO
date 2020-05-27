@@ -94,7 +94,6 @@ public class InformaNoticiaRest {
 				noticia.setIp(u.obtieneIp());
 				noticia.setHora(String.valueOf(u.obtieneHora()));
 				repository.save(noticia);
-				System.out.println(repository.findAll());
 				return "Se registro correctamente la noticia";
 			} else {
 				return "Ocurrio un error al registrar la noticia";
