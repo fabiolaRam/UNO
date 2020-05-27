@@ -1,17 +1,11 @@
 package com.backend.graficaInforma.rest;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.backend.graficaInforma.dto.CatalogoEstados;
-import com.backend.graficaInforma.dto.Suscriptores;
 import com.backend.graficaInforma.dto.SuscriptoresCounts;
 import com.backend.graficaInforma.repository.CatalogoEstadoRepository;
 import com.backend.graficaInforma.repository.SuscriptoresRepository;
