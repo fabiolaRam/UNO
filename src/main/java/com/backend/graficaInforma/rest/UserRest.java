@@ -31,7 +31,7 @@ public class UserRest {
 	Gson gson = new Gson();
 	Utilerias u = new Utilerias();
 	
-	@GetMapping("/registraUsuario/{usuario}&{contrasena}&{telefono}&{permisos}")
+	@GetMapping("/backEGInforma/registraUsuario/{usuario}&{contrasena}&{telefono}&{permisos}")
 	public ResponseEntity<String> registrarUsuario(@PathVariable("usuario") String usuario, @PathVariable("contrasena") String contrasena,
 			@PathVariable("telefono") String telefono, @PathVariable("permisos") List<String> permisos){
 		String estatus = "";

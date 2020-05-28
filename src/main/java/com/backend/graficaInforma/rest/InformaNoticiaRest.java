@@ -27,7 +27,7 @@ public class InformaNoticiaRest {
 	InformaNoticia noticia = new InformaNoticia();
 	Utilerias u = new Utilerias();
 
-	@GetMapping("/guardarNoticiaRegular/{mensaje}")
+	@GetMapping("/backEGInforma/guardarNoticiaRegular/{mensaje}")
 	public ResponseEntity<String> guardarNoticiaRegular(@PathVariable String mensaje) {
 		String estatus = guardarNoticiaNoche(mensaje, "1");
 		Gson gson = new Gson();
@@ -37,7 +37,7 @@ public class InformaNoticiaRest {
 	}
 
 	@SuppressWarnings("null")
-	@GetMapping("/guardarNoticiaRxEstado/{mensaje}/{estado}")
+	@GetMapping("/backEGInforma/guardarNoticiaRxEstado/{mensaje}/{estado}")
 	public ResponseEntity<String> guardarNoticiaRxEstado(@PathVariable("mensaje") String mensaje, @PathVariable("estado") List<String> estado) {
 		String estatus = null;
 		if (estado != null || !estado.isEmpty()) {
@@ -52,7 +52,7 @@ public class InformaNoticiaRest {
 		return new ResponseEntity<>(gson.toJson(estatus), HttpStatus.OK);
 	}
 
-	@GetMapping("/guardarNoticiaUrgente/{mensaje}")
+	@GetMapping("/backEGInforma/guardarNoticiaUrgente/{mensaje}")
 	public ResponseEntity<String> guardarNoticiaUrgente(@PathVariable String mensaje) {
 		String estatus = guardarNoticiaNoche(mensaje, "2");
 		Gson gson = new Gson();
@@ -62,7 +62,7 @@ public class InformaNoticiaRest {
 	}
 
 	@SuppressWarnings("null")
-	@GetMapping("/guardarNoticiaUxEstado/{mensaje}/{estado}")
+	@GetMapping("/backEGInforma/guardarNoticiaUxEstado/{mensaje}/{estado}")
 	public ResponseEntity<String> guardarNoticiaUxEstado(@PathVariable("mensaje") String mensaje, @PathVariable("estado") List<String> estado) {
 		String estatus = null;
 		if (estado != null || !estado.isEmpty()) {
@@ -126,7 +126,7 @@ public class InformaNoticiaRest {
 		}
 	}
 
-	@GetMapping("/historicoNoticia/{fechaInicio}/{fechaFin}")
+	@GetMapping("/backEGInforma/historicoNoticia/{fechaInicio}/{fechaFin}")
 	public List<InformaNoticia> historicoNoticia(@PathVariable("fechaInicio") String fechaInicio,
 			@PathVariable("fechaFin") String fechaFin) {
 		List<InformaNoticia> historico = repository.findByFechaBetween(fechaInicio, fechaFin);

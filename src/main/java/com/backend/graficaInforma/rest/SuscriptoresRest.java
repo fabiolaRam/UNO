@@ -25,7 +25,7 @@ public class SuscriptoresRest {
 	
 	Utilerias u = new Utilerias();
 
-	@GetMapping("/consultaSuscriptores")
+	@GetMapping("/backEGInforma/consultaSuscriptores")
 	public List<SuscriptoresCounts> consultaSuscriptores(){
 		List<SuscriptoresCounts> suscrip = repository.findSuscriptoresCount();
 		return suscrip;

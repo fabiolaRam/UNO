@@ -37,7 +37,7 @@ public class LoginRest {
 	@Autowired
 	private AuthenticationManager authenticationManager;
 
-	@PostMapping("login")
+	@PostMapping("/backEGInforma/login")
 	public ResponseEntity<UserModel> login(@RequestBody Users usuario) throws Exception {
 		try {
 			System.out.println("usuario: "+ usuario.getUsername() +" password: "+usuario.getPassword());

@@ -21,7 +21,7 @@ public class GraficaInformaRest {
 	@Autowired
 	GraficaInformaRepository repository;
 
-	@GetMapping("/GraficaInformaRest/{fecha}")
+	@GetMapping("/backEGInforma/GraficaInformaRest/{fecha}")
 	public List<Object> getFecha(@PathVariable String fecha) {
 		
 		String dia = fecha.substring(0, 2);

@@ -27,7 +27,7 @@ public class EnvioSMS {
 	Utilerias u = new Utilerias();
 	Gson gson = new Gson();
 
-	@GetMapping("/olvidoPassword/{telefono}")
+	@GetMapping("/backEGInforma/olvidoPassword/{telefono}")
 	public ResponseEntity<String> olvidoPassword(@PathVariable String telefono) {
 		String estatus = "";
 
@@ -44,7 +44,7 @@ public class EnvioSMS {
 		return new ResponseEntity<>(gson.toJson(estatus), HttpStatus.OK);
 	}
 
-	@GetMapping("/enviaClaveAcceso/{username}")
+	@GetMapping("/backEGInforma/enviaClaveAcceso/{username}")
 	private Boolean enviaClaveAcceso(@PathVariable String username) {
 		if (username != null) {
 			List<Users> usuario = repository.findByUsername(username);

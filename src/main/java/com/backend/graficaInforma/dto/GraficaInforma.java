@@ -5,8 +5,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table (name="GRAFICA_INFORMA")
 public class GraficaInforma implements Serializable {
 
 	private static final long serialVersionUID = 2510128880720820517L;

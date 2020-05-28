@@ -53,7 +53,7 @@ public class Utilerias {
 
 	public Integer enviarSMS(Long telefono, String mensaje) {
 		try {
-
+			System.out.println(telefono + " " + mensaje);
 			SMPPSession session = new SMPPSession();
 			session.connectAndBind("10.201.18.134", 8305, new BindParameter(BindType.BIND_TX, "INFORSA", "inSva22", "",
 					TypeOfNumber.ALPHANUMERIC, NumberingPlanIndicator.UNKNOWN, null));
