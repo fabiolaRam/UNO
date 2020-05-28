@@ -52,7 +52,7 @@ public class LoginRest {
 			}
 			user.setAutorities(autorities);
 			if(!validaClave(usuario.getUsername(), usuario.getClave()) ) {
-				throw new Exception("clave incorrecta");
+				throw new BadCredentialsException("clave incorrecta");
 			}
 			return new ResponseEntity<UserModel>(user, HttpStatus.OK);
 		} catch (BadCredentialsException e) {
