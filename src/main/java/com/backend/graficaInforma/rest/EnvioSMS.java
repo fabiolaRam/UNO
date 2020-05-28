@@ -30,7 +30,7 @@ public class EnvioSMS {
 	@GetMapping("/backEGInforma/olvidoPassword/{telefono}")
 	public ResponseEntity<String> olvidoPassword(@PathVariable String telefono) {
 		String estatus = "";
-
+		System.out.println("TELEFONO:  "+telefono);
 		if (telefono != null) {
 			String password = Utilerias.generarPassword();
 			repository.updatePassword(u.encripta(password), telefono);
