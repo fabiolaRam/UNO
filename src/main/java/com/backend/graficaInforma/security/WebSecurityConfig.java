@@ -68,8 +68,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 			.disable() // Disable the Cross-site request forgery filter - could cause that any 
 			.addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
 			.authorizeRequests() 
-			.antMatchers(HttpMethod.POST, "/login").permitAll() // Login doesn't need authorization
-			.antMatchers("/olvidoPassword/*","/enviaClaveAcceso/*").permitAll()
+			.antMatchers(HttpMethod.POST, "/backEGInforma/login").permitAll() // Login doesn't need authorization
+			.antMatchers("/backEGInforma/olvidoPassword/*","/backEGInforma/enviaClaveAcceso/*").permitAll()
 			.anyRequest().authenticated(); // All other pages are securized
 
 	}
