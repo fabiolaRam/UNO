@@ -79,7 +79,7 @@ public class InformaNoticiaRest {
 
 	@SuppressWarnings("null")
 	private String guardarNoticiaTarde(String mensaje, String estado) {
-		LocalTime limite = LocalTime.of(18, 00, 00);
+		LocalTime limite = LocalTime.of(14, 00, 00);
 		LocalTime actual = LocalTime.now();
 
 		if (actual.isAfter(limite)) {
@@ -103,7 +103,7 @@ public class InformaNoticiaRest {
 	
 	@SuppressWarnings("null")
 	private String guardarNoticiaNoche(String mensaje, String estado) {
-		LocalTime limite = LocalTime.of(14, 10, 00);
+		LocalTime limite = LocalTime.of(19, 10, 00);
 		LocalTime actual = LocalTime.now();
 
 		if (actual.isAfter(limite)) {
