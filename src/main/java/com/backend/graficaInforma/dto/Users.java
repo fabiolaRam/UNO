@@ -21,8 +21,11 @@ public class Users implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	
+	@Column(name ="ID_USUARIO")
 	private Long idUsuario;
+	@Column(name ="USERNAME")
 	private String username;
+	@Column(name ="PASSWORD")
 	private String password;
 	@Column(name ="PHONENUMBER")
 	private String phoneNumber;

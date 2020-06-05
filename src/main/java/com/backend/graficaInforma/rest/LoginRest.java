@@ -31,7 +31,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 @RestController
 @CrossOrigin(origins = { "http://localhost:4200", "http://10.191.190.15:7777", "http://10.191.190.9:7777",
-		"http://intranet.telcel.com:9045" })
+		"http://www.informa.telcel.com:5000" })
 public class LoginRest {
 
 	@Autowired

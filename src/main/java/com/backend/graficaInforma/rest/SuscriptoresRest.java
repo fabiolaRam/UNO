@@ -13,7 +13,7 @@ import com.backend.graficaInforma.utilerias.Utilerias;
 
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:4200","http://10.191.190.15:7777", "http://10.191.190.9:7777", "http://intranet.telcel.com:9045"})
+@CrossOrigin(origins = {"http://localhost:4200","http://10.191.190.15:7777", "http://10.191.190.9:7777", "http://www.informa.telcel.com:5000"})
 
 public class SuscriptoresRest {
 
