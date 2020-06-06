@@ -1,6 +1,7 @@
 package com.backend.graficaInforma.dto;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table (name="AUTHORITIES")
+@Table (name="AUTHORITIES", schema="VI5ADMW")
 public class Authorities implements Serializable {
 
 	/**
@@ -19,19 +20,19 @@ public class Authorities implements Serializable {
 	private static final long serialVersionUID = 8767518584152674937L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	
 	@Column(name="ID")
-	private Long id;
+	private BigDecimal id;
 	
 	@Column(name="USERNAME")
 	private String username;
 	@Column(name="AUTHORITY")
 	private String authority;
-	public Long getId() {
+	public BigDecimal getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(BigDecimal id) {
 		this.id = id;
 	}
 	public String getUsername() {

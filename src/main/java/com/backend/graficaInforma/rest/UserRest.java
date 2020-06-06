@@ -1,5 +1,6 @@
 package com.backend.graficaInforma.rest;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -43,7 +44,7 @@ public class UserRest {
 		usu.setUsuarioReg("");
 		usu.setClave("");
 		usu.setSolicitud(String.valueOf(new Date()));
-		usu.setAviso(1);
+		usu.setAviso(new BigDecimal(1));
 		
 		Authorities aut = new Authorities();
 		aut.setUsername(usuario);

@@ -32,8 +32,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 		// Use BCryptPasswordEncoder
 
 		auth.jdbcAuthentication().dataSource(dataSource)
-		.usersByUsernameQuery("select USERNAME, PASSWORD, PHONENUMBER from USERS where USERNAME=?")
-		.authoritiesByUsernameQuery("select USERNAME, AUTHORITY from AUTHORITIES where USERNAME=?")
+		.usersByUsernameQuery("select USERNAME, PASSWORD, AVISO from VI5ADMW.USERS where USERNAME=? ")
+		.authoritiesByUsernameQuery("select USERNAME, AUTHORITY from VI5ADMW.AUTHORITIES where USERNAME=? ")
 		.passwordEncoder(passwordEncoder())
 		;
 	}
@@ -69,8 +69,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 			.addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
 			.authorizeRequests() 
 			.antMatchers(HttpMethod.POST, "/backEGInforma/login").permitAll() // Login doesn't need authorization
-			.antMatchers("/backEGInforma/olvidoPassword/*","/backEGInforma/enviaClaveAcceso/*","/backEGInforma/enviaClaveAcceso/*").permitAll()
-			.anyRequest().authenticated(); // All other pages are securized
+			.antMatchers("/backEGInforma/olvidoPassword/*","/backEGInforma/enviaClaveAcceso/*","/backEGInforma/enviaClaveAcceso/*").permitAll();
+			//.anyRequest().authenticated(); // All other pages are securized
 
 	}
 }

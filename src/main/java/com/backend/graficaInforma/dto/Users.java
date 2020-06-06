@@ -1,6 +1,7 @@
 package com.backend.graficaInforma.dto;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,35 +11,39 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "USERS")
+@Table(name = "USERS", schema = "VI5ADMW")
 public class Users implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -4094220278947553138L;
-	
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	
-	@Column(name ="ID_USUARIO")
-	private Long idUsuario;
-	@Column(name ="USERNAME")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID_USUARIO")
+	private BigDecimal idUsuario;
+	@Column(name = "USERNAME")
 	private String username;
-	@Column(name ="PASSWORD")
+	@Column(name = "PASSWORD")
 	private String password;
-	@Column(name ="PHONENUMBER")
+	@Column(name = "PHONENUMBER")
 	private String phoneNumber;
-	private String usuarioReg; 
+	@Column(name = "USUARIO_REG")
+	private String usuarioReg;
+	@Column(name = "ClAVE")
 	private String clave;
+	@Column(name = "SOLICITUD")
 	private String solicitud;
-	private int aviso;
-	
+	@Column(name = "AVISO")
+	private BigDecimal aviso;
+
 	public Users() {
-		super();
+		
 	}
-	
-	public Users(String username, String password, String phoneNumber, String usuarioReg, String token, String solicitud, int aviso) {
+
+	public Users(String username, String password, String phoneNumber, String usuarioReg, String token,
+			String solicitud, BigDecimal aviso) {
 		this.username = username;
 		this.password = password;
 		this.phoneNumber = phoneNumber;
@@ -46,14 +51,6 @@ public class Users implements Serializable {
 		this.clave = token;
 		this.solicitud = solicitud;
 		this.aviso = aviso;
-	}
-
-	public Long getIdUsuario() {
-		return idUsuario;
-	}
-
-	public void setIdUsuario(Long idUsuario) {
-		this.idUsuario = idUsuario;
 	}
 
 	public String getUsername() {
@@ -104,18 +101,26 @@ public class Users implements Serializable {
 		this.solicitud = solicitud;
 	}
 
-	public int getAviso() {
-		return aviso;
-	}
-
-	public void setAviso(int aviso) {
-		this.aviso = aviso;
-	}
-
 	@Override
 	public String toString() {
 		return "Users [idUsuario=" + idUsuario + ", username=" + username + ", password=" + password + ", phoneNumber="
 				+ phoneNumber + ", usuarioReg=" + usuarioReg + ", clave=" + clave + ", solicitud=" + solicitud
 				+ ", aviso=" + aviso + "]";
+	}
+
+	public BigDecimal getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(BigDecimal idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+	public BigDecimal getAviso() {
+		return aviso;
+	}
+
+	public void setAviso(BigDecimal aviso) {
+		this.aviso = aviso;
 	}
 }
