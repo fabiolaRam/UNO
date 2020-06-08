@@ -11,7 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table (name="AUTHORITIES", schema="VI5ADMW")
+@Table (name="AUTHORITIES")
+//@Table (name="AUTHORITIES", schema="VI5ADMW")
 public class Authorities implements Serializable {
 
 	/**

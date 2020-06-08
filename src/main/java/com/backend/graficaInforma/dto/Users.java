@@ -11,7 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "USERS", schema = "VI5ADMW")
+@Table(name = "USERS")
+//@Table(name = "USERS", schema = "VI5ADMW")
 public class Users implements Serializable {
 
 	/**
@@ -37,15 +38,15 @@ public class Users implements Serializable {
 	private String solicitud;
 	@Column(name = "AVISO")
 	private BigDecimal aviso;
-	@Column(name = "ENABLED")
-	private BigDecimal enabled;
+//	@Column(name = "ENABLED")
+//	private BigDecimal enabled;
 
 	public Users() {
 		
 	}
 	
 	public Users(String username, String password, String phoneNumber, String usuarioReg, String token,
-			String solicitud, BigDecimal aviso, BigDecimal enabled) {
+			String solicitud, BigDecimal aviso) {
 		this.username = username;
 		this.password = password;
 		this.phoneNumber = phoneNumber;
@@ -53,7 +54,7 @@ public class Users implements Serializable {
 		this.clave = token;
 		this.solicitud = solicitud;
 		this.aviso = aviso;
-		this.enabled = enabled;
+//		this.enabled = enabled;
 	}
 
 	public String getUsername() {
@@ -120,19 +121,18 @@ public class Users implements Serializable {
 		this.aviso = aviso;
 	}
 	
-	public BigDecimal getEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(BigDecimal enabled) {
-		this.enabled = enabled;
-	}
+//	public BigDecimal getEnabled() {
+//		return enabled;
+//	}
+//
+//	public void setEnabled(BigDecimal enabled) {
+//		this.enabled = enabled;
+//	}
 
 	@Override
 	public String toString() {
 		return "Users [idUsuario=" + idUsuario + ", username=" + username + ", password=" + password + ", phoneNumber="
 				+ phoneNumber + ", usuarioReg=" + usuarioReg + ", clave=" + clave + ", solicitud=" + solicitud
-				+ ", aviso=" + aviso 
-				+ ", enabled="+ enabled + "]";
+				+ ", aviso=" + aviso + "]";
 	}
 }
