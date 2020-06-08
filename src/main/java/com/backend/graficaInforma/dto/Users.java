@@ -37,13 +37,15 @@ public class Users implements Serializable {
 	private String solicitud;
 	@Column(name = "AVISO")
 	private BigDecimal aviso;
+	@Column(name = "ENABLED")
+	private BigDecimal enabled;
 
 	public Users() {
 		
 	}
 	
 	public Users(String username, String password, String phoneNumber, String usuarioReg, String token,
-			String solicitud, BigDecimal aviso) {
+			String solicitud, BigDecimal aviso, BigDecimal enabled) {
 		this.username = username;
 		this.password = password;
 		this.phoneNumber = phoneNumber;
@@ -51,6 +53,7 @@ public class Users implements Serializable {
 		this.clave = token;
 		this.solicitud = solicitud;
 		this.aviso = aviso;
+		this.enabled = enabled;
 	}
 
 	public String getUsername() {
@@ -117,10 +120,19 @@ public class Users implements Serializable {
 		this.aviso = aviso;
 	}
 	
+	public BigDecimal getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(BigDecimal enabled) {
+		this.enabled = enabled;
+	}
+
 	@Override
 	public String toString() {
 		return "Users [idUsuario=" + idUsuario + ", username=" + username + ", password=" + password + ", phoneNumber="
 				+ phoneNumber + ", usuarioReg=" + usuarioReg + ", clave=" + clave + ", solicitud=" + solicitud
-				+ ", aviso=" + aviso + "]";
+				+ ", aviso=" + aviso 
+				+ ", enabled="+ enabled + "]";
 	}
 }
