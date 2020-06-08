@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "USERS")
+@Table(name = "USERS", schema ="SYS")
 public class Users implements Serializable {
 
 	/**
@@ -33,12 +33,13 @@ public class Users implements Serializable {
 	private String clave;
 	private String solicitud;
 	private int aviso;
+	private byte enabled;
 	
 	public Users() {
 		super();
 	}
 	
-	public Users(String username, String password, String phoneNumber, String usuarioReg, String token, String solicitud, int aviso) {
+	public Users(String username, String password, String phoneNumber, String usuarioReg, String token, String solicitud, int aviso, byte enabled) {
 		this.username = username;
 		this.password = password;
 		this.phoneNumber = phoneNumber;
@@ -46,6 +47,7 @@ public class Users implements Serializable {
 		this.clave = token;
 		this.solicitud = solicitud;
 		this.aviso = aviso;
+		this.enabled = enabled;
 	}
 
 	public Long getIdUsuario() {
@@ -112,10 +114,19 @@ public class Users implements Serializable {
 		this.aviso = aviso;
 	}
 
+	public byte getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(byte enabled) {
+		this.enabled = enabled;
+	}
+
 	@Override
 	public String toString() {
 		return "Users [idUsuario=" + idUsuario + ", username=" + username + ", password=" + password + ", phoneNumber="
 				+ phoneNumber + ", usuarioReg=" + usuarioReg + ", clave=" + clave + ", solicitud=" + solicitud
-				+ ", aviso=" + aviso + "]";
+				+ ", aviso=" + aviso 
+				+ ", enabled=" + enabled + "]";
 	}
 }
