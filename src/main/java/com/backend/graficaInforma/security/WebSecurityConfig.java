@@ -69,8 +69,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 			.addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
 			.authorizeRequests() 
 			.antMatchers(HttpMethod.POST, "/backEGInforma/login").permitAll() // Login doesn't need authorization
-		    .antMatchers("/backEGInforma/olvidoPassword/*","/backEGInforma/enviaClaveAcceso/*").permitAll();
-			//.anyRequest().authenticated(); // All other pages are securized
+		    .antMatchers("/backEGInforma/olvidoPassword/*","/backEGInforma/enviaClaveAcceso/*").permitAll()
+			.anyRequest().authenticated(); // All other pages are securized
 
 	}
 }
