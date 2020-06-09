@@ -39,6 +39,7 @@ public class LoginRest {
 
 	@PostMapping("/backEGInforma/login")
 	public ResponseEntity<UserModel> login(@RequestBody Users usuario) throws Exception {
+		System.out.println("servicio login/" + usuario.getUsername() + " password: " + usuario.getPassword());
 		try {
 			System.out.println("usuario: "+ usuario.getUsername() +" password: "+usuario.getPassword());
 			Authentication auth = authenticationManager.authenticate(
@@ -111,8 +112,9 @@ public class LoginRest {
 	private UsersRepository repository;
 	
 	public boolean validaClave(String usuario,  String clave) {
-		
+		System.out.println("metodo valida clave usuario: " + usuario + " clave: " + clave);
 		List<Users> l = new ArrayList<Users>();
+		System.out.println("buscando clave..");
 		l = repository.findByUsernameAndClave(usuario, clave);
 		if (!l.isEmpty()) {
 			System.out.println(l);

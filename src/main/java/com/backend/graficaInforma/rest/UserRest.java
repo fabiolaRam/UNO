@@ -37,6 +37,7 @@ public class UserRest {
 	public ResponseEntity<String> registrarUsuario(@PathVariable("usuario") String usuario,
 			@PathVariable("contrasena") String contrasena, @PathVariable("telefono") String telefono,
 			@PathVariable("permisos") List<String> permisos) {
+		System.out.println("servicio registraUsuario/" + usuario + "&" + contrasena + "&" + telefono + "&" + permisos);
 		String estatus = "";
 
 		Users usu = new Users();
@@ -47,14 +48,14 @@ public class UserRest {
 		usu.setClave("");
 		usu.setSolicitud(String.valueOf(new Date()));
 		usu.setAviso(new BigDecimal(1));
-
+		System.out.println("recorriendo lista de permisos");
 		if (permisos != null) {
 			for (String p : permisos) {
 				guardaPermisos(usuario, p);
 			}
 		}
 		try {
-			System.out.println(usu.toString());
+			System.out.println("datos de usuario: " + usu.toString());
 			uRepository.save(usu);
 
 			estatus = "Se registro correctamente el usuario";
@@ -63,6 +64,7 @@ public class UserRest {
 			estatus = "Ocurrio un error al registrar el usuario " + e;
 			gson.toJson(estatus);
 		}
+		System.out.println("estatus: " + estatus);
 		return new ResponseEntity<>(gson.toJson(estatus), HttpStatus.OK);
 	}
 
@@ -71,6 +73,7 @@ public class UserRest {
 		if (p != null) {
 			aut.setUsername(usuario);
 			aut.setAuthority(p);
+			System.out.println("guardando en tabla authorities: " + aut.toString());
 			aRepository.save(aut);
 		}
 	}

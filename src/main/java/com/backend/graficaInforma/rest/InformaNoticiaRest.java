@@ -29,7 +29,9 @@ public class InformaNoticiaRest {
 
 	@GetMapping("/backEGInforma/guardarNoticiaRegular/{mensaje}")
 	public ResponseEntity<String> guardarNoticiaRegular(@PathVariable String mensaje) {
+		System.out.println("servicio guardarNoticiaRegular/" + mensaje);
 		String estatus = guardarNoticiaNoche(mensaje, "1");
+		System.out.println("estatus: " + estatus);
 		Gson gson = new Gson();
 		gson.toJson(estatus);
 		
@@ -39,12 +41,15 @@ public class InformaNoticiaRest {
 	@SuppressWarnings("null")
 	@GetMapping("/backEGInforma/guardarNoticiaRxEstado/{mensaje}/{estado}")
 	public ResponseEntity<String> guardarNoticiaRxEstado(@PathVariable("mensaje") String mensaje, @PathVariable("estado") List<String> estado) {
+		System.out.println("servicio guardarNoticiaRxEstado/" + mensaje + "/" + estado);
 		String estatus = null;
 		if (estado != null || !estado.isEmpty()) {
+			System.out.println("lista de noticias...");
 			for (String e : estado) {
 				String n = "1" + e;
 				estatus = guardarNoticiaTarde(mensaje, n);
 			}
+			System.out.println("estatus: " + estatus);
 		}
 		Gson gson = new Gson();
 		gson.toJson(estatus);
@@ -54,7 +59,9 @@ public class InformaNoticiaRest {
 
 	@GetMapping("/backEGInforma/guardarNoticiaUrgente/{mensaje}")
 	public ResponseEntity<String> guardarNoticiaUrgente(@PathVariable String mensaje) {
+		System.out.println("servicio guardarNoticiaUrgente/" +  mensaje);
 		String estatus = guardarNoticiaNoche(mensaje, "2");
+		System.out.println("estatus: " +  estatus);
 		Gson gson = new Gson();
 		gson.toJson(estatus);
 		
@@ -64,12 +71,15 @@ public class InformaNoticiaRest {
 	@SuppressWarnings("null")
 	@GetMapping("/backEGInforma/guardarNoticiaUxEstado/{mensaje}/{estado}")
 	public ResponseEntity<String> guardarNoticiaUxEstado(@PathVariable("mensaje") String mensaje, @PathVariable("estado") List<String> estado) {
+		System.out.println("servicio guardarNoticiaUxEstado/" + mensaje + "/" + estado);
 		String estatus = null;
 		if (estado != null || !estado.isEmpty()) {
+			System.out.println("recorriendo lista de estados");
 			for (String e : estado) {
 				String n = "2" + e;
 				estatus = guardarNoticiaTarde(mensaje, n);
 			}
+			System.out.println("estatus: " +  estatus);
 		}
 		Gson gson = new Gson();
 		gson.toJson(estatus);
@@ -79,10 +89,12 @@ public class InformaNoticiaRest {
 
 	@SuppressWarnings("null")
 	private String guardarNoticiaTarde(String mensaje, String estado) {
+		System.out.println("metodo... guardarNoticiaTarde mensaje: " + mensaje + " estado: " + estado );
 		LocalTime limite = LocalTime.of(14, 00, 00);
 		LocalTime actual = LocalTime.now();
 
 		if (actual.isAfter(limite)) {
+			System.out.println("validando hora limite : " + limite);
 			return "La hora limite de registro de noticias por estado son las 2:00 PM, por lo que esta noticia no puede ser registrada.";
 		} else {
 			if (mensaje != null || !mensaje.isEmpty()) {
@@ -93,9 +105,12 @@ public class InformaNoticiaRest {
 				noticia.setAcceso("usuario");
 				noticia.setIp(u.obtieneIp());
 				noticia.setHora(String.valueOf(u.obtieneHora()));
+				System.out.println("guardando noticia: " + noticia.toString());
 				repository.save(noticia);
+				System.out.println("se guardo la noticia correctamente");
 				return "Se registro correctamente la noticia";
 			} else {
+				System.out.println("hubo un error al guardar la noticia");
 				return "Ocurrio un error al registrar la noticia";
 			}
 		}
@@ -103,12 +118,15 @@ public class InformaNoticiaRest {
 	
 	@SuppressWarnings("null")
 	private String guardarNoticiaNoche(String mensaje, String estado) {
+		System.out.println("metodo guardarNoticiaNoche mensaje: " + mensaje + " estado: " + estado);
 		LocalTime limite = LocalTime.of(19, 10, 00);
 		LocalTime actual = LocalTime.now();
-
+		
 		if (actual.isAfter(limite)) {
+			System.out.println("validando hora hasta " + limite);
 			return "La hora limite de registro de noticias es a las 19:10 PM, por lo que esta noticia no puede ser registrada.";
 		} else {
+			System.out.println("guardando mensaje");
 			if (mensaje != null || !mensaje.isEmpty()) {
 				noticia.setMensaje(mensaje);
 				noticia.setFecha(u.obtieneFecha());
@@ -117,10 +135,12 @@ public class InformaNoticiaRest {
 				noticia.setAcceso("usuario");
 				noticia.setIp(u.obtieneIp());
 				noticia.setHora(String.valueOf(u.obtieneHora()));
+				System.out.println("guardando noticia. " + noticia.toString());
 				repository.save(noticia);
-
+				System.out.println("se guardo correctamente en bd");
 				return "Se registro correctamente la noticia";
 			} else {
+				System.out.println("hubo un error al guardar la noticia");
 				return "Ocurrio un error al registrar la noticia";
 			}
 		}
@@ -129,7 +149,11 @@ public class InformaNoticiaRest {
 	@GetMapping("/backEGInforma/historicoNoticia/{fechaInicio}/{fechaFin}")
 	public List<InformaNoticia> historicoNoticia(@PathVariable("fechaInicio") String fechaInicio,
 			@PathVariable("fechaFin") String fechaFin) {
+		System.out.println("servicio historicoNoticia/" + fechaInicio + "/" + fechaFin);
+		System.out.println("buscando noticias....");
 		List<InformaNoticia> historico = repository.findByFechaBetween(fechaInicio, fechaFin);
+		System.out.println("noticias...");
+		System.out.println(historico);
 		return historico;
 	}
 

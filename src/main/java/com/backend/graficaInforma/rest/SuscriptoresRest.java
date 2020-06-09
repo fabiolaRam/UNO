@@ -27,7 +27,11 @@ public class SuscriptoresRest {
 
 	@GetMapping("/backEGInforma/consultaSuscriptores")
 	public List<SuscriptoresCounts> consultaSuscriptores(){
+		System.out.println("servicio consultaSuscriptores");
+		System.out.println("buscando suscriptores");
 		List<SuscriptoresCounts> suscrip = repository.findSuscriptoresCount();
+		System.out.println("datos...");
+		System.out.println(suscrip.toString());
 		return suscrip;
 	}
 }
