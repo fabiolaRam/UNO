@@ -20,24 +20,26 @@ import com.backend.graficaInforma.utilerias.Utilerias;
 import com.google.gson.Gson;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:4200","http://10.191.190.15:7777", "http://10.191.190.9:7777", "http://www.informa.telcel.com:5000"})
+@CrossOrigin(origins = { "http://localhost:4200", "http://10.191.190.15:7777", "http://10.191.190.9:7777",
+		"http://www.informa.telcel.com:5000" })
 public class UserRest {
-	
+
 	@Autowired
 	UsersRepository uRepository;
-	
+
 	@Autowired
 	AuthoritiesRepository aRepository;
-	
+
 	Gson gson = new Gson();
 	Utilerias u = new Utilerias();
-	
+
 	@GetMapping("/backEGInforma/registraUsuario/{usuario}&{contrasena}&{telefono}&{permisos}")
-	public ResponseEntity<String> registrarUsuario(@PathVariable("usuario") String usuario, @PathVariable("contrasena") String contrasena,
-			@PathVariable("telefono") String telefono, @PathVariable("permisos") List<String> permisos){
+	public ResponseEntity<String> registrarUsuario(@PathVariable("usuario") String usuario,
+			@PathVariable("contrasena") String contrasena, @PathVariable("telefono") String telefono,
+			@PathVariable("permisos") List<String> permisos) {
 		String estatus = "";
-		
-		Users usu = new Users();		
+
+		Users usu = new Users();
 		usu.setUsername(usuario);
 		usu.setPassword(u.encripta(contrasena));
 		usu.setPhoneNumber(telefono);
@@ -45,27 +47,32 @@ public class UserRest {
 		usu.setClave("");
 		usu.setSolicitud(String.valueOf(new Date()));
 		usu.setAviso(new BigDecimal(1));
-		
-		Authorities aut = new Authorities();
-		aut.setUsername(usuario);
-		for(String i: permisos) {
-			System.out.println(i);
-		}	
-		try {
-			if (permisos != null) {
-				for (String p : permisos) {
-					aut.setAuthority(p);
-					aRepository.save(aut);
-				}
+
+		if (permisos != null) {
+			for (String p : permisos) {
+				guardaPermisos(usuario, p);
 			}
+		}
+		try {
+			System.out.println(usu.toString());
 			uRepository.save(usu);
+
 			estatus = "Se registro correctamente el usuario";
 			gson.toJson(estatus);
-		}catch(Exception e) {
+		} catch (Exception e) {
 			estatus = "Ocurrio un error al registrar el usuario " + e;
 			gson.toJson(estatus);
 		}
 		return new ResponseEntity<>(gson.toJson(estatus), HttpStatus.OK);
+	}
+
+	private void guardaPermisos(String usuario, String p) {
+		Authorities aut = new Authorities();
+		if (p != null) {
+			aut.setUsername(usuario);
+			aut.setAuthority(p);
+			aRepository.save(aut);
+		}
 	}
 
 }
