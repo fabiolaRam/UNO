@@ -90,7 +90,8 @@ public class InformaNoticiaRest {
 	@SuppressWarnings("null")
 	private String guardarNoticiaTarde(String mensaje, String estado) {
 		System.out.println("metodo... guardarNoticiaTarde mensaje: " + mensaje + " estado: " + estado );
-		LocalTime limite = LocalTime.of(14, 00, 00);
+//		LocalTime limite = LocalTime.of(14, 00, 00);
+		LocalTime limite = LocalTime.of(20, 00, 00);
 		LocalTime actual = LocalTime.now();
 
 		if (actual.isAfter(limite)) {
