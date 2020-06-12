@@ -47,17 +47,22 @@ public class SuscriptoresRest {
 
 	@GetMapping("/backEGInforma/grafica/{fecha}")
 	public List<Object> getFecha(@PathVariable String fecha) {
-		String dia = fecha.substring(0, 2);
-		String mes = fecha.substring(3, 5);
-		String anio = fecha.substring(6,10);
+		String anio = fecha.substring(0, 4);
+		String mes = fecha.substring(5, 7);
+		String dia = fecha.substring(8, 10);
+		System.out.println("dia: " + dia + " mes: " + mes + " anio: " + anio);
 		System.out.println("servicio GraficaInformaRest/" + fecha);
 		System.out.println("busca por marcacion 26 y 27");
 		List<GraficaInforma> lista26 = buscarPorMarcacion("2226", anio, mes, dia);
+		System.out.println(lista26);
 		List<GraficaInforma> lista27 = buscarPorMarcacion("2227", anio, mes, dia);
+		System.out.println(lista27);
 		System.out.println("creando mapas");
-		Map<Object, Object> mapa26 = lista26.stream().sorted((a,b)->a.getHora().compareTo(b.getHora())).collect(Collectors.toMap(x->x.getHora(), x->x.getCantidad()));
-		Map<Object, Object> mapa27 = lista27.stream().sorted((a,b)->a.getHora().compareTo(b.getHora())).collect(Collectors.toMap(x->x.getHora(), x->x.getCantidad()));
-		
+		Map<Object, Object> mapa26 = lista26.stream().sorted((a, b) -> a.getHora().compareTo(b.getHora()))
+				.collect(Collectors.toMap(x -> x.getHora(), x -> x.getCantidad()));
+		Map<Object, Object> mapa27 = lista27.stream().sorted((a, b) -> a.getHora().compareTo(b.getHora()))
+				.collect(Collectors.toMap(x -> x.getHora(), x -> x.getCantidad()));
+
 		addPuts(mapa26);
 		addPuts(mapa27);
 		System.out.println("termiando mapas");
@@ -67,25 +72,26 @@ public class SuscriptoresRest {
 		System.out.println("enviando informacion: " + mapas.toString());
 		return mapas;
 	}
-	
-	public List<GraficaInforma> buscarPorMarcacion(String marcacion, String anio, String mes, String dia){
+
+	public List<GraficaInforma> buscarPorMarcacion(String marcacion, String anio, String mes, String dia) {
+		System.out.println(marcacion + " " + anio + " " + mes + " " + dia);
 		List<GraficaInforma> gi = new ArrayList<GraficaInforma>();
-		for (GraficaInforma grafica : gRepository.findByMarcacionAndAnioAndMesAndDia(marcacion, anio, mes, dia)) { 
+		for (GraficaInforma grafica : gRepository.findByMarcacionAndAnioAndMesAndDia(marcacion, anio, mes, dia)) {
 			gi.add(grafica);
 		}
-		if(gi.size()>0 ) {
-			System.out.println("Se encontraron registros");	
-		}else {
+		if (gi.size() > 0) {
+			System.out.println("Se encontraron registros");
+		} else {
 			System.out.println("no hay registros!");
 		}
 		return gi;
 	}
-	
-	public Map<Object, Object> addPuts(Map<Object, Object> mapa){
+
+	public Map<Object, Object> addPuts(Map<Object, Object> mapa) {
 		for (int i = 1; i < 25; i++) {
-			if ((mapa.containsKey((i<10)?"0"+String.valueOf(i):String.valueOf(i))) == false) {
-				mapa.put((i<10)?"0"+String.valueOf(i):String.valueOf(i), 0);
-			} 
+			if ((mapa.containsKey((i < 10) ? "0" + String.valueOf(i) : String.valueOf(i))) == false) {
+				mapa.put((i < 10) ? "0" + String.valueOf(i) : String.valueOf(i), 0);
+			}
 		}
 		return mapa;
 	}

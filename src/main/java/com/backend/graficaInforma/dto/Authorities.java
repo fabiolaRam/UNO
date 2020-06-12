@@ -21,7 +21,7 @@ public class Authorities implements Serializable {
 	private static final long serialVersionUID = 8767518584152674937L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	
 	@Column(name="ID")
 	private BigDecimal id;

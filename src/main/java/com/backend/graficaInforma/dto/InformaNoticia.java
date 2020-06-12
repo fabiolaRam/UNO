@@ -18,7 +18,7 @@ public class InformaNoticia implements Serializable {
 	private static final long serialVersionUID = -5782282525517689962L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	
 	private Long id;
 	private String mensaje;

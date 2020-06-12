@@ -18,7 +18,7 @@ public class Suscriptores  implements Serializable{
 	private static final long serialVersionUID = 6725555030920230977L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	
 	private Long id;
 	private String telefono;
